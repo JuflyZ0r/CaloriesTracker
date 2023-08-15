@@ -1,16 +1,29 @@
-import menuExecution.IMPL.CommandImpl;
+import menuExecution.Command;
+import menuExecution.IMPL.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class StartProgramWork {
     Scanner scanner = new Scanner(System.in);
-    CommandImpl command = new CommandImpl();
+
 
     public void start() throws IOException {
         displayMenu();
         int choiceTheTask = scanner.nextInt();
-        command.exec(choiceTheTask);
+        List<Command> commands = List.of(
+                new AddProduct(),
+                new ListOfAllProduct(),
+                new AddEatenProduct(),
+                new CalculatorCaloriesPerDay(),
+                new Exit(),
+                new UnknownCommand()
+        );
+
+        for (Command command : commands) {
+            command.exec(choiceTheTask);
+        }
 
     }
 
