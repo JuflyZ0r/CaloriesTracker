@@ -29,12 +29,7 @@ public class CommandImpl implements Command {
     List<String> stringList = getProductInfoFromFile.getEatenProductDuringDay();
     @Override
     public void exec(Integer input) throws IOException {
-
-        List<Integer> integerList = new ArrayList<>(Arrays.asList(1,2,3,4,5));
-
-        for (Integer integer : integerList){
-            System.out.println(integer);
-        }
+        
 
         switch (input){
             case 1:
