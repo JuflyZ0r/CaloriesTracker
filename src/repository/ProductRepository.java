@@ -1,12 +1,26 @@
 package repository;
 
-import java.io.FileNotFoundException;
+import model.Product;
+
 import java.io.IOException;
+import java.util.List;
 
 public interface ProductRepository {
 
-    void saveToFileRepository(String data,String address) throws IOException;
+    void saveToFile(List<Product> productList) throws IOException;
 
-    String readFromFileRepository(String address);
+    void saveCaloriesValuePerDay(double calories) throws IOException;
+
+    void saveEatenProductName(List<String> namesList) throws IOException;
+
+    List<Product> getProductInfoFromFile(String line);
+
+    List<String> getEatenProductDuringDay();
+
+
+
+
+
+
 
 }

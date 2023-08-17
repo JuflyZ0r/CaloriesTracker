@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProductService {
 
-    void countCaloriesEatenDuringDay(List<Product> productList,List<String> stringList) throws IOException;
+    void countCaloriesEatenDuringDay(List<Product> productList,List<String> stringList) throws Exception;
 
-    void addNewProductToFileDb(List<Product> productList ,Product product) throws IOException;
+    void addNewProductToFileDb(List<Product> productList ,Product product) throws Exception;
 
     void addEatenProductName(List<String> namesList,String name) throws IOException;
 

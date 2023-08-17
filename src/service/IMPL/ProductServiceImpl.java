@@ -1,6 +1,6 @@
 package service.IMPL;
 
-import dao.SaveCaloriesToFile;
+import repository.IMPL.ProductFileRepository;
 import service.ProductService;
 import model.Product;
 import java.io.IOException;
@@ -9,25 +9,26 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-    SaveCaloriesToFile saveCaloriesToFile = new SaveCaloriesToFile();
+    ProductFileRepository productFileRepository = new ProductFileRepository();
     @Override
-    public void countCaloriesEatenDuringDay(List<Product> productList, List<String> namesList) throws IOException {
+    public void countCaloriesEatenDuringDay(List<Product> productList, List<String> namesList) throws Exception {
         double calorieSum = 0;
         for (String productName : namesList){
             for(Product product : productList){
-                if(product.getProductName().equals(productName)){
+                if(productList.contains(productName)){
                     calorieSum += product.getNutrition().getCalories();
-                }else{
-                    System.out.println("Продукт не існує в базі");
+                }
+                else{
+                    throw new Exception("Такого продукта не існує");
                 }
             }
             
         }
-        saveCaloriesToFile.saveCaloriesValuePerDay(calorieSum);
+        productFileRepository.saveCaloriesValuePerDay(calorieSum);
     }
 
     @Override
-    public void addNewProductToFileDb(List<Product> productList ,Product product) throws IOException {
+    public void addNewProductToFileDb(List<Product> productList ,Product product) throws Exception {
 
         List<String> namesList = new ArrayList<>();
 
@@ -36,10 +37,10 @@ public class ProductServiceImpl implements ProductService {
         }
 
         if(namesList.contains(product.getProductName())){
-            System.out.println("Продукт з таким іменем існує");
+            throw new Exception("Продукт з таким іменем існує");
         }else {
             productList.add(product);
-            saveCaloriesToFile.saveToFile(productList);
+            productFileRepository.saveToFile(productList);
         }
 
     }
@@ -48,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
     public void addEatenProductName(List<String> namesList,String name) throws IOException {
         List<String> updatedList = namesList;
         updatedList.add(name);
-        saveCaloriesToFile.saveEatenProductName(updatedList);
+        productFileRepository.saveEatenProductName(updatedList);
 
     }
 
