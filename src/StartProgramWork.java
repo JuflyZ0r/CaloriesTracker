@@ -14,7 +14,6 @@ public class StartProgramWork {
     Configuration configuration = new Configuration();
 
     List<String> stringList;
-    String address;
     Scanner scanner = new Scanner(System.in);
 
 
@@ -58,5 +57,9 @@ public class StartProgramWork {
                 "\n4. Калькулятор калорій за день" +
                 "\n5. Вийти з програми");
     }
+
+
+
+
 
 }
